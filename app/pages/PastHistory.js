@@ -1,6 +1,7 @@
 import { StyleSheet, TextInput, Button, View, Alert } from 'react-native'
 import React, { useState } from 'react'
-
+import { db } from '../firebase'
+import {collection, addDoc} from 'firebase/firestore'
 
 const PastHistory = ({ navigation }) => {
 
@@ -22,30 +23,26 @@ const PastHistory = ({ navigation }) => {
         Weight: "",
         id: ""
     })
-
-    function processInputs() {
-        //e.nativeEvent.text
-    }
     const handleChange = (e) => {
-        const value = e.nativeEvent.text;
-        const name = e._dispatchInstances.pendingProps.name;
-
+        let value = e.nativeEvent.text;
+        let name = e._dispatchInstances.pendingProps.name;
+        if(name === 'Allergies' || name === 'Past_Med' || name === 'Symptoms'){
+            let valueArr = value.split(',');
+            let a = valueArr.map((e)=>{
+                e = e.trim()
+                e = e.charAt(0).toUpperCase() + e.slice(1)
+                return e
+            })
+            value = Object.assign({},a)
+        }
         setDetails(details => ({
             ...details, [name]: value
         }))
-
-
-        // await setDetails({...details,[name]:value})
-        console.log('details: ', details)
-        console.log('value: ', value)
-        console.log('name: ', name)
-        // e.nativeEvent.text
-        // e._dispatchInstances.pendingProps.name
-
-
     }
-    function handleSubmit() {
-        console.log(details)
+    async function handleSubmit() {
+        let ref = await addDoc(collection(db, 'patient_data'),details)
+        Alert.alert("Data saved!")
+        navigation.navigate('test')
     }
     return (
         <View style={styles.container}>
