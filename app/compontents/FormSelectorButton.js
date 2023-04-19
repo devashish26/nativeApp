@@ -4,7 +4,7 @@ import { TouchableWithoutFeedback } from 'react-native'
 
 function FormSelectorButton(props) {
     return (
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={props.onPress}>
             <View style={[styles.container, {backgroundColor:props.bgCol}]}>
                 <Text>{props.title}</Text>
             </View>

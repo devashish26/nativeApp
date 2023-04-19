@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import {StyleSheet, Text, View, Dimensions } from 'react-native'
+import React from 'react'
+import {StyleSheet, View, Dimensions } from 'react-native'
 
 function FormContainer({children}) {
     return (

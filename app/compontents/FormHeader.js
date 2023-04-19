@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Text, StyleSheet, View, Image } from 'react-native'
+import React from 'react'
+import { Text, StyleSheet, View, Image, Animated } from 'react-native'
 
 function FormHeader(props) {
   
@@ -8,8 +8,8 @@ function FormHeader(props) {
             <Image style={{height:300}} source={require('./../../assets/hms.png')}/>
             <View style={styles.container}>
                 <View style={{flexDirection:'row'}}>
-                    <Text style={styles.heading}>{props.leftHeading}{" "}</Text>
-                    <Text style={styles.heading}>{props.rightHeading}</Text>
+                    <Animated.Text style={[styles.heading, {transform: [{translateX:props.leftHeaderTranslateX}]}]}>{props.leftHeading}{" "}</Animated.Text>
+                    <Animated.Text style={[styles.heading, {opacity:props.rightHeaderOpacity, transform: [{translateY:props.rightHeaderTranslateY}]}]}>{props.rightHeading}</Animated.Text>
                 </View>
                 <Text style={styles.subheading}>{props.subHeading}</Text>
             </View>
