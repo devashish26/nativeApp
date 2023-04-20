@@ -13,13 +13,13 @@ export default function App() {
     return (
       <NavigationContainer>
         {isSignedIn ? (
-          <Stack.Navigator initialRouteName='test'>
-              <Stack.Screen name='test' component={TestPage}/>
-              <Stack.Screen name='PastHistory' component={PastHistory}/>
+          <Stack.Navigator initialRouteName='test' >
+              <Stack.Screen name='test' component={TestPage} options={{headerShown:false}}/>
+              <Stack.Screen name='PastHistory' component={PastHistory} options={{headerShown:false}}/>
           </Stack.Navigator>
         ):(
           <Stack.Navigator initialRouteName='LoginSignup'>
-              <Stack.Screen name='LoginSignup' initialParams={{setisSignedIn: setisSignedIn}} component={LoginSignupContainer} />
+              <Stack.Screen name='LoginSignup' options={{headerShown:false}} initialParams={{setisSignedIn: setisSignedIn}} component={LoginSignupContainer} />
           </Stack.Navigator>
         )}
       </NavigationContainer>
