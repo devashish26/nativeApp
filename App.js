@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginSignupContainer from './app/pages/LoginSignupContainer';
@@ -6,15 +7,21 @@ import TestPage from './app/pages/TestPage';
 import PastHistory from './app/pages/PastHistory';
 
 export default function App() {
+    const [isSignedIn, setisSignedIn] = useState(false)
     const Stack = createNativeStackNavigator();
     console.log("app executed")
     return (
       <NavigationContainer>
-          <Stack.Navigator initialRouteName='LoginSignup'>
-              <Stack.Screen name='LoginSignup' component={LoginSignupContainer} />
+        {isSignedIn ? (
+          <Stack.Navigator initialRouteName='test'>
               <Stack.Screen name='test' component={TestPage}/>
               <Stack.Screen name='PastHistory' component={PastHistory}/>
           </Stack.Navigator>
+        ):(
+          <Stack.Navigator initialRouteName='LoginSignup'>
+              <Stack.Screen name='LoginSignup' initialParams={{setisSignedIn: setisSignedIn}} component={LoginSignupContainer} />
+          </Stack.Navigator>
+        )}
       </NavigationContainer>
     );
 }

@@ -6,7 +6,7 @@ import { Alert } from 'react-native'
 import { db } from './../firebase'
 import { getDocs, collection } from 'firebase/firestore'
 
-export default function Login({navigation}) {
+export default function Login({navigation, changeStatus}) {
   const [userMail, setUserMail] = useState('')
   const [pwd, setPwd] = useState('')
   let allEntries=[]
@@ -16,7 +16,8 @@ export default function Login({navigation}) {
     await showData()  
     if(usrs.includes(userMail) && pwd === allEntries[usrs.indexOf(userMail)].password){
       Alert.alert("Successfully logged in.")
-      navigation.navigate('test')
+      // navigation.navigate('test')
+      changeStatus(true)
     }else{
       Alert.alert("Invalid credentials")
     }

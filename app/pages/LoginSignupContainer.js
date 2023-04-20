@@ -7,7 +7,8 @@ import Signup from './../compontents/Signup';
 
 const {width} = Dimensions.get('window') 
 
-function LoginSignupContainer({navigation}){
+function LoginSignupContainer({navigation, route}){
+    // console.log(route.params.setisSignedIn)
     const animation = useRef(new Animated.Value(0)).current
     const scroll = useRef()
     const rightHeaderOpacity = animation.interpolate({
@@ -33,10 +34,10 @@ function LoginSignupContainer({navigation}){
             </View>
             <ScrollView ref={scroll} horizontal pagingEnabled scrollEventThrottle={16} showsHorizontalScrollIndicator={false} onScroll={Animated.event([{nativeEvent:{contentOffset:{x:animation}}}], {useNativeDriver:false})}>
                 <ScrollView>
-                    <Signup navigation={navigation}/>
+                    <Signup navigation={navigation} />
                 </ScrollView>
                 <ScrollView>
-                    <Login navigation={navigation}/>
+                    <Login navigation={navigation} changeStatus={route.params.setisSignedIn}/>
                 </ScrollView>
             </ScrollView>
         </View>
