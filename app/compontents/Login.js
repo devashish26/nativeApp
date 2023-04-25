@@ -6,18 +6,25 @@ import { Alert } from 'react-native'
 import { db } from './../firebase'
 import { getDocs, collection } from 'firebase/firestore'
 
-export default function Login({navigation, changeStatus}) {
+export default function Login({changeStatus}) {
   const [userMail, setUserMail] = useState('')
   const [pwd, setPwd] = useState('')
   let allEntries=[]
   let usrs=[]
   
   async function validate(){
-    await showData()  
+    let allEntV = await showData()  
+    let details = {}
+    for(let i in allEntV){
+      if(allEntV[i].email === userMail){
+        details = allEntV[i]
+        break
+      }
+    }
+    console.log('details in validate: ', details)
     if(usrs.includes(userMail) && pwd === allEntries[usrs.indexOf(userMail)].password){
       Alert.alert("Successfully logged in.")
-      // navigation.navigate('test')
-      changeStatus(true)
+      changeStatus({...details,signedIn: true})
     }else{
       Alert.alert("Invalid credentials")
     }
@@ -32,6 +39,7 @@ export default function Login({navigation, changeStatus}) {
     for(let i in allEntries){
       usrs.push(allEntries[i].email)
     }
+    return allEntries
     // console.log('users: ', usrs) // all emails
   }
   return (

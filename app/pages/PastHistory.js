@@ -8,7 +8,7 @@ const PastHistory = ({ navigation }) => {
     const [details, setDetails] = useState({
         Address: "",
         Age: "",
-        Allergies: {},
+        Allergy: {},
         BP: "",
         BloodGroup: "",
         Condition: "",
@@ -26,7 +26,7 @@ const PastHistory = ({ navigation }) => {
     const handleChange = (e) => {
         let value = e.nativeEvent.text;
         let name = e._dispatchInstances.pendingProps.name;
-        if(name === 'Allergies' || name === 'Past_Med' || name === 'Symptoms'){
+        if(name === 'Allergy' || name === 'Past_Med' || name === 'Symptoms' || name === 'Curr_Med'){
             let valueArr = value.split(',');
             let a = valueArr.map((e)=>{
                 e = e.trim()
@@ -48,7 +48,7 @@ const PastHistory = ({ navigation }) => {
         <View style={styles.container}>
             <TextInput onChange={handleChange} name='Address' placeholder='Address' inputMode='text' />
             <TextInput onChange={handleChange} name='Age' placeholder='Age' inputMode='numeric' />
-            <TextInput onChange={handleChange} name='Allergies' placeholder='Allergies (Comma separated)' inputMode='text' />
+            <TextInput onChange={handleChange} name='Allergy' placeholder='Allergies (Comma separated)' inputMode='text' />
             <TextInput onChange={handleChange} name='BP' placeholder='BP(mm/hg)' inputMode='numeric' />
             <TextInput onChange={handleChange} name='BloodGroup' placeholder='Blood Group' inputMode='text' />
             <TextInput onChange={handleChange} name='Condition' placeholder='Condition' inputMode='text' />

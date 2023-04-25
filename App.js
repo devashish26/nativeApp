@@ -5,21 +5,23 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginSignupContainer from './app/pages/LoginSignupContainer';
 import TestPage from './app/pages/TestPage';
 import PastHistory from './app/pages/PastHistory';
+import Home from './app/pages/Home';
 
 export default function App() {
-    const [isSignedIn, setisSignedIn] = useState(false)
+    const [loginDetails, setloginDetails] = useState({signedIn: true})
     const Stack = createNativeStackNavigator();
     console.log("app executed")
     return (
       <NavigationContainer>
-        {isSignedIn ? (
-          <Stack.Navigator initialRouteName='test' >
-              <Stack.Screen name='test' component={TestPage} options={{headerShown:false}}/>
+        {loginDetails.signedIn ? (
+          <Stack.Navigator initialRouteName='home' >
+              <Stack.Screen name='test' component={TestPage} options={{headerShown:false}} initialParams={{userDetails: loginDetails}}/>
               <Stack.Screen name='PastHistory' component={PastHistory} options={{headerShown:false}}/>
+              <Stack.Screen name = 'home' component={Home} options={{headerShown:false}} initialParams={{userDetails: loginDetails}}/>
           </Stack.Navigator>
         ):(
           <Stack.Navigator initialRouteName='LoginSignup'>
-              <Stack.Screen name='LoginSignup' options={{headerShown:false}} initialParams={{setisSignedIn: setisSignedIn}} component={LoginSignupContainer} />
+              <Stack.Screen name='LoginSignup' options={{headerShown:false}} initialParams={{setloginDetails: setloginDetails}} component={LoginSignupContainer} />
           </Stack.Navigator>
         )}
       </NavigationContainer>

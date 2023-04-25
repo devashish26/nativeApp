@@ -1,14 +1,14 @@
-import { Text, View } from 'react-native'
-import React, { Component } from 'react'
+import { View, Text } from 'react-native'
+import React from 'react'
 
-export class TestPage extends Component {
-  render() {
-    return (
-      <View>
-        <Text>TestPage</Text>
-      </View>
-    )
-  }
+const TestPage = ({route}) => {
+  // route.params.userDetails
+  return (
+    <View>
+      <Text>TestPage</Text>
+      <Text></Text>
+    </View>
+  )
 }
 
 export default TestPage

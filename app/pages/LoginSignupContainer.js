@@ -37,7 +37,7 @@ function LoginSignupContainer({navigation, route}){
                     <Signup navigation={navigation} />
                 </ScrollView>
                 <ScrollView>
-                    <Login navigation={navigation} changeStatus={route.params.setisSignedIn}/>
+                    <Login navigation={navigation} changeStatus={route.params.setloginDetails}/>
                 </ScrollView>
             </ScrollView>
         </View>
