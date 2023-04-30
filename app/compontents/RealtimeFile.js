@@ -14,7 +14,7 @@ const RealtimeFile = () => {
                 id:key, 
                 ...data[key]
             }))
-            console.log(allPosts)
+            // console.log(allPosts)
             setRtData(allPosts)
         })
     },[])

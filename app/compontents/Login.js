@@ -25,12 +25,14 @@ export default function Login({changeStatus}) {
     if(usrs.includes(userMail) && pwd === allEntries[usrs.indexOf(userMail)].password){
       Alert.alert("Successfully logged in.")
       changeStatus({...details,signedIn: true})
+      // have to add condition to check if past history exists or not 
+      // if yes then redirect to home else redirect to past history page
     }else{
       Alert.alert("Invalid credentials")
     }
   }
   async function showData(){
-    const loginRef = collection(db,"login")
+    const loginRef = collection(db,"patient_login")
     const logindataCollection = await getDocs(loginRef)
     allEntries = logindataCollection.docs.map((doc)=>({
       ...doc.data(), id:doc.id

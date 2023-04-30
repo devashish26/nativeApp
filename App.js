@@ -8,16 +8,17 @@ import PastHistory from './app/pages/PastHistory';
 import Home from './app/pages/Home';
 
 export default function App() {
-    const [loginDetails, setloginDetails] = useState({signedIn: true})
+    const [loginDetails, setloginDetails] = useState({signedIn: false})
+    console.log('details in app.js: ', loginDetails)
     const Stack = createNativeStackNavigator();
     console.log("app executed")
     return (
       <NavigationContainer>
         {loginDetails.signedIn ? (
           <Stack.Navigator initialRouteName='home' >
-              <Stack.Screen name='test' component={TestPage} options={{headerShown:false}} initialParams={{userDetails: loginDetails}}/>
-              <Stack.Screen name='PastHistory' component={PastHistory} options={{headerShown:false}}/>
               <Stack.Screen name = 'home' component={Home} options={{headerShown:false}} initialParams={{userDetails: loginDetails}}/>
+              <Stack.Screen name='PastHistory' component={PastHistory} options={{headerShown:false}}/>
+              <Stack.Screen name='test' component={TestPage} options={{headerShown:false}} initialParams={{userDetails: loginDetails}}/>
           </Stack.Navigator>
         ):(
           <Stack.Navigator initialRouteName='LoginSignup'>

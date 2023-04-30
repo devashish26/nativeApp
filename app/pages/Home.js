@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import React from 'react'
 import MidDiv from '../compontents/MidDiv'
 import BottomDiv from '../compontents/BottomDiv'
@@ -7,7 +7,8 @@ import TopDiv from '../compontents/TopDiv'
 let height = Dimensions.get('window').height
 
 const Home = ({route}) => {
-  let nameU = route.params.userDetails.Name
+  // console.log(route.params.userDetails.email)
+  let nameU = route.params.userDetails.email
   return (
     <View style={styles.container}>
 
@@ -31,7 +32,7 @@ export default Home
 
 const styles = StyleSheet.create({
   container:{display:'flex', flexDirection:'column', justifyContent:'space-around'},
-  topDiv:{height:50,backgroundColor:'pink', marginTop:30},
+  topDiv:{height:50,backgroundColor:'pink', marginTop:30, display:'flex', justifyContent:'center'},
   midDiv:{height:height-130,},
   bottomDiv:{height:50, backgroundColor:'pink'},
 })

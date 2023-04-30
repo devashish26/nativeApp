@@ -3,84 +3,77 @@ import React, {useState} from 'react'
 import FormContainer from './FormContainer'
 
 import { db } from '../firebase'
-import { addDoc, getDocs, collection } from 'firebase/firestore'
+import { doc, setDoc, getDocs, collection } from 'firebase/firestore'
 
 export default function Signup({navigation}) {
-  const [emailid, setEmailid] = useState('')
-  const [deviceID, setDeviceID] = useState('')
-  const [mobileno, setMobileno] = useState('')
-  const [paswd, setPaswd] = useState('')
-  const [cpaswd, setCpaswd] = useState('')
-
-  let usrs = []
-  function validate(){
-    if(emailid.includes('@')){
-      if(mobileno.length===10){
-        if(paswd === cpaswd){
-          if(!usrs.includes(emailid)){
-            return true;
+  const [patientDetails, setPatientDetails] = useState({
+      email:"",
+      id:"",
+      password:"",
+      cpassword:""
+  })
+  let patIds=[]
+  const validate= async (pD)=>{
+    // first get patient_data collection entries
+      let valChecked = false
+      const myRef = collection(db,"patient_data")
+      const myColl = await getDocs(myRef)
+      allEntries = myColl.docs.map((doc)=>({
+        ...doc.data()
+      }))
+      // allEntries is an array which contains all entries of patient_login collection
+      patIds = allEntries.map((e)=>{return e.id})
+      if(patIds.includes(pD.id)){
+          if(pD.email.includes('@')){
+              if(pD.password.length>=8){
+                  if(pD.password === pD.cpassword){
+                      valChecked = true
+                  }else{
+                      Alert.alert("Passwords do not match")
+                      return false
+                  }
+              }else{
+                  Alert.alert("Password must be atleast 8 characters long")
+                  return false
+              }
           }else{
-            Alert.alert('Email already exists')
-            return false;
+              Alert.alert(`Enter valid email id (should contain '@' symbol)`)
+              return false
           }
-        }else{
-          Alert.alert('Passwords do not match')
-          return false;
-        }
       }else{
-        Alert.alert('Enter valid mobile number')
-        return false;
+        Alert.alert("Device ID does not exist")
+        return false
       }
-    }else{
-      Alert.alert('Enter valid email')
-      return false;
-    }
+      return valChecked
   }
-  async function handlePress(){
-    {/*
-      1. 
-      2. check correctness of email
-      3. length of mobile no
-      4. figure out device id
-      5. if user already exists
-      6. check passwords match or not
-    */}
-    await fetchData()
-    if(validate()){
-      await saveData()
-      navigation.navigate('PastHistory')
-    }
+  const handleChange = (e)=>{
+    // setting user input in patientDetails object
+
+    let value = e.nativeEvent.text;
+    let name = e._dispatchInstances.pendingProps.name;
+    setPatientDetails(details => ({
+            ...details, [name]: value
+        }))
+
+    // now we have to validate entries and add them in database
+    // validate: **the device id should exist in paitent_data collection
   }
-  async function fetchData(){
-    let loginRef = collection(db, 'login')
-    let loginCollection = await getDocs(loginRef)
-    let allEntries = loginCollection.docs.map((doc)=>({
-      ...doc.data(), id: doc.id
-    }))
-    for(let i in allEntries){
-      usrs.push(allEntries[i].email)
-    }
-    console.log(allEntries)
-    console.log(usrs)
-  }
-  async function saveData(){
-    const addRef = await addDoc(collection(db,'login'),{
-      email:emailid,
-      devid:deviceID,
-      mobile:mobileno,
-      password:paswd,
-      userid:emailid
-    });
-    console.log('doc id is: ', addRef.id)
-    Alert.alert("Signup successful! You may login")
+  const handlePress = async () =>{
+      if(await validate(patientDetails)){
+          //code to add patientDetails into database
+          await setDoc(doc(db, "patient_login", patientDetails.id), {
+                id: patientDetails.id.trim(),
+                email: patientDetails.email.trim(),
+                password: patientDetails.password
+            });
+      }
   }
   return (
     <FormContainer>
-        <TextInput placeholder='Enter email' inputMode='email' value={emailid} onChangeText={(e)=>{setEmailid(e)}}/>
-        <TextInput placeholder='Enter device ID' value={deviceID} onChangeText={(e)=>{setDeviceID(e)}}/>
-        <TextInput placeholder='Enter mobile number' value={mobileno} onChangeText={(e)=>{setMobileno(e)}}/>
-        <TextInput placeholder='Enter password' secureTextEntry={true} value={paswd} onChangeText={(e)=>{setPaswd(e)}}/>
-        <TextInput placeholder='Confirm password' secureTextEntry={true} value={cpaswd} onChangeText={(e)=>{setCpaswd(e)}}/>
+        <TextInput onChange={handleChange} name='id' placeholder='Enter device ID' />
+        <TextInput onChange={handleChange} name='email' placeholder='Enter email' inputMode='email' />
+        <TextInput onChange={handleChange} name='password' placeholder='Enter password' secureTextEntry={true} />
+        <TextInput onChange={handleChange} name='cpassword' placeholder='Confirm password' secureTextEntry={true} />
         <Button style={styles.btn} title='Submit' onPress={()=>{handlePress()}}/>
     </FormContainer>
   )

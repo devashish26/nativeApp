@@ -47,7 +47,7 @@ const PastHistory = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <TextInput onChange={handleChange} name='Address' placeholder='Address' inputMode='text' />
-            <TextInput onChange={handleChange} name='Age' placeholder='Age' inputMode='numeric' />
+            <TextInput onChange={handleChange} name='Age' placeholder='Date of Birth (yyyy-mm-dd)' inputMode='numeric' />
             <TextInput onChange={handleChange} name='Allergy' placeholder='Allergies (Comma separated)' inputMode='text' />
             <TextInput onChange={handleChange} name='BP' placeholder='BP(mm/hg)' inputMode='numeric' />
             <TextInput onChange={handleChange} name='BloodGroup' placeholder='Blood Group' inputMode='text' />
@@ -64,7 +64,7 @@ const PastHistory = ({ navigation }) => {
             <TextInput onChange={handleChange} name='id' placeholder='Device ID' inputMode='text' />
             <View style={styles.container2}>
                 <Button title='Save' onPress={() => { handleSubmit() }} />
-                <Button title='Skip' onPress={() => { Alert.alert('Please make sure to add details later.'); navigation.navigate('test') }} />
+                <Button title='Skip' onPress={() => { Alert.alert('Please make sure to add details later.'); navigation.navigate('home') }} />
             </View>
         </View>
     )
