@@ -8,12 +8,12 @@ import PastHistory from './app/pages/PastHistory';
 import Home from './app/pages/Home';
 
 export default function App() {
-    const [loginDetails, setloginDetails] = useState({signedIn: false})
-    console.log('details in app.js: ', loginDetails)
+    const [loginDetails, setloginDetails] = useState({signedIn: true})
+    // console.log('details in app.js: ', loginDetails)
     const Stack = createNativeStackNavigator();
     console.log("app executed")
     return (
-      <NavigationContainer>
+      <NavigationContainer style={styles.container}>
         {loginDetails.signedIn ? (
           <Stack.Navigator initialRouteName='home' >
               <Stack.Screen name = 'home' component={Home} options={{headerShown:false}} initialParams={{userDetails: loginDetails}}/>
@@ -32,10 +32,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     display:'flex',
-    backgroundColor: '#fff',
+    backgroundColor: '#E5F9DB',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection:'column',
+    fontFamily: 'Montserrat'
   },
   inputBox:{
     display:'flex',

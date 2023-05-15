@@ -1,5 +1,8 @@
-import { StyleSheet, Text, TextInput, Button, View, Dimensions, Alert } from 'react-native'
+import { StyleSheet, Text, TextInput, Pressable, View, Dimensions, Alert } from 'react-native'
 import React from 'react'
+
+const Wwidth = Dimensions.get('window').width;
+const Wheight = Dimensions.get('screen').height;
 
 const UpdateDataForm = () => {
     const handleChange=()=>{}
@@ -25,9 +28,12 @@ const UpdateDataForm = () => {
                 <TextInput onChange={handleChange} name='Pulse' placeholder='Pulse' inputMode='text' />
                 <TextInput onChange={handleChange} name='Symptoms' placeholder='Symptoms (Comma separated)' inputMode='text' />
                 <TextInput onChange={handleChange} name='Weight' placeholder='Weight' inputMode='numeric' />
-                <View style={styles.container2}>
+                {/* <View style={styles.container2}>
                     <Button title='Save' onPress={() => { handleSubmit() }} />
-                </View>
+                </View> */}
+                <Pressable onPress={()=>{handleSubmit()}} style={{backgroundColor:'#83764F', width:Wwidth/5, height:Wheight/25, display:'flex', justifyContent:'center', alignItems:'center'}}>
+                    <Text style={{color:'white'}}>SAVE</Text>
+                </Pressable>
             </View>
         </View>
     )
@@ -36,7 +42,7 @@ const UpdateDataForm = () => {
 export default UpdateDataForm
 
 const styles = StyleSheet.create({
-    container: {width:Dimensions.get('window').width, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', padding: 20, fontSize: 30 },
+    container: {width:Wwidth, justifyContent: 'center', alignItems: 'center', backgroundColor: '#E5F9DB', padding: 20, fontSize: 30 },
     container2: { display: 'flex', flexDirection: 'row', gap: 15, paddingTop: 30 },
     heading:{fontWeight:'bold', fontSize:30}
 })

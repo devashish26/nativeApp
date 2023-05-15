@@ -31,8 +31,8 @@ const Home = ({route}) => {
 export default Home
 
 const styles = StyleSheet.create({
-  container:{display:'flex', flexDirection:'column', justifyContent:'space-around'},
-  topDiv:{height:50,backgroundColor:'pink', marginTop:30, display:'flex', justifyContent:'center'},
+  container:{display:'flex', flexDirection:'column', justifyContent:'space-around', backgroundColor:'#E5F9DB'},
+  topDiv:{height:50,backgroundColor:'#83764F', marginTop:30, display:'flex', justifyContent:'center'},
   midDiv:{height:height-130,},
-  bottomDiv:{height:50, backgroundColor:'pink'},
+  bottomDiv:{height:50, backgroundColor:'#83764F'},
 })

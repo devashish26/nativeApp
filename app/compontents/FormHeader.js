@@ -18,7 +18,7 @@ function FormHeader(props) {
 }
 
 const styles = StyleSheet.create({
-    container:{height:100, backgroundColor:'pink', alignItems:'center', justifyContent: 'center'},
+    container:{height:100, backgroundColor:'#A0D8B3', alignItems:'center', justifyContent: 'center'},
     heading:{fontSize:30, fontWeight:'bold', color:'#1b1b33'},
     subheading:{fontSize:18, color:'#1b1b33'}
 })

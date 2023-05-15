@@ -10,7 +10,7 @@ function FormContainer({children}) {
 }
 
 const styles = StyleSheet.create({
-    container:{padding:20, backgroundColor:'pink', height:300, width:Dimensions.get('window').width, gap:20}
+    container:{padding:20, backgroundColor:'#A0D8B3', height:300, width:Dimensions.get('window').width, gap:20}
 })
 
 export default FormContainer
