@@ -6,12 +6,12 @@ import UpdateDataForm from './UpdateDataForm'
 
 const height = Dimensions.get('window').height
 
-const MidDiv = () => {
+const MidDiv = ({userData}) => {
     
     return (
         <View style={styles.cont}>
             <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
-                <QnA/>
+                <QnA userData={userData}/>
                 <RealtimeFile />
                 <UpdateDataForm />
             </ScrollView>

@@ -2,6 +2,9 @@ import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image, ScrollView
 import React from 'react'
 import Symptom from './Symptom'
 
+import { db } from '../firebase'
+import { doc, setDoc, getDocs, collection } from 'firebase/firestore'
+
 const head = ["continuous_sneezing","ulcers_on_tongue","vomiting","cough","sunken_eyes","headache","nausea","pain_behind_the_eyes","yellowing_of_eyes","blurred_and_distorted_vision","phlegm","redness_of_eyes","sinus_pressure","runny_nose","congestion","puffy_face_and_eyes","drying_and_tingling_lips","slurred_speech","loss_of_smell","watering_from_eyes","red_sore_around_nose"]
 const mid = ["chest_pain","throat_irritation","swelling_of_stomach","acute_liver_failure","back_pain","indigestion","breathlessness","patches_in_throat","acidity","stomach_pain","stomach_bleeding","belly_pain","stiff_neck","enlarged_thyroid","neck_pain","fast_heart_rate","palpitations"]
 const low = ["swollen_legs","irritation_in_anus","knee_pain","bloody_stool","pain_in_anal_region","pain_during_bowel_movements","yellow_urine","diarrhoea","abdominal_pain","constipation","dark_urine","spotting_ urination","burning_micturition","painful_walking","prominent_veins_on_calf","distention_of_abdomen","polyuria","passage_of_gases","continuous_feel_of_urine","foul_smell_of urine","bladder_discomfort"]
@@ -11,7 +14,7 @@ const misc = ["family_history","increased_appetite","abnormal_menstruation","alt
 const selectedSymptoms=[]
 
 
-const QnA = () => {
+const QnA = ({userData}) => {
 
     function addSymps(symp){
         if(!(selectedSymptoms.includes(symp))){
@@ -23,7 +26,16 @@ const QnA = () => {
             selectedSymptoms.pop(selectedSymptoms.indexOf(symp))
         }
     }
-
+    async function handleSubmit(){
+        if(selectedSymptoms.length){
+            // access user id using userData.id
+            const stringedSymps= selectedSymptoms.join(" ")
+            await setDoc(doc(db, "patient_symptoms", userData.id),{
+                id: userData.id.trim(),
+                symptoms:stringedSymps
+            });
+        }
+    }
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -101,7 +113,7 @@ const QnA = () => {
                     </View>
                 </TouchableOpacity>      
             </View>
-            <Button title='submit' onPress={()=>{console.log(selectedSymptoms)}}/>
+            <Button title='submit' onPress={handleSubmit}/>
         </ScrollView>
     )
 }

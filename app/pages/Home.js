@@ -7,7 +7,7 @@ import TopDiv from '../compontents/TopDiv'
 let height = Dimensions.get('window').height
 
 const Home = ({route}) => {
-  // console.log(route.params.userDetails.email)
+  // console.log(route.params.userDetails)
   let nameU = route.params.userDetails.email
   return (
     <View style={styles.container}>
@@ -17,7 +17,7 @@ const Home = ({route}) => {
       </View>
 
       <View style={styles.midDiv}>
-        <MidDiv/>
+        <MidDiv userData={route.params.userDetails}/>
       </View>
 
       <View style={styles.bottomDiv}>

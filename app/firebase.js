@@ -20,3 +20,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
 export const rdb = getDatabase()
+// https://console.firebase.google.com/u/0/project/healthmonitorapp-78c16/database/healthmonitorapp-78c16-default-rtdb/data/~2F
