@@ -6,19 +6,22 @@ import Login from './../compontents/Login';
 import Signup from './../compontents/Signup';
 
 const {width} = Dimensions.get('window') 
+const green = '#A0D8B3'
+const brown = '#A2A378'
+
 
 function LoginSignupContainer({navigation, route}){
 
-    const [bgActive, setBgActive] = useState('#A0D8B3')
-    const [bgInactive, setBgInactive] = useState('#A2A378')
+    const [bgActive, setBgActive] = useState(green)
+    const [bgInactive, setBgInactive] = useState(brown)
 
     const handlePressToggle = ()=>{//serious rework needed
-        if(bgActive === '#A0D8B3' && bgInactive === '#A2A378'){
-            setBgActive('#A2A378')
-            setBgInactive('#A0D8B3')
-        }else if(bgActive === '#A2A378' && bgInactive === '#A0D8B3'){
-            setBgActive('#A0D8B3')
-            setBgInactive('#A2A378')
+        if(bgActive === green && bgInactive === brown){
+            setBgActive(brown)
+            setBgInactive(green)
+        }else if(bgActive === brown && bgInactive === green){
+            setBgActive(green)
+            setBgInactive(brown)
         }
     }
 

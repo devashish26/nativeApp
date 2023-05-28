@@ -1,19 +1,20 @@
 import { StyleSheet, Text, View, ScrollView, Animated, Dimensions } from 'react-native'
-import React from 'react'
+import React,{useRef} from 'react'
 import QnA from './QnA'
 import RealtimeFile from './RealtimeFile'
-import UpdateDataForm from './UpdateDataForm'
+// import UpdateDataForm from './UpdateDataForm'
 
 const height = Dimensions.get('window').height
+const width = Dimensions.get('window').width
 
-const MidDiv = ({userData}) => {
+const MidDiv = ({userData, scroll}) => {
     
     return (
         <View style={styles.cont}>
-            <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
-                <QnA userData={userData}/>
-                <RealtimeFile />
-                <UpdateDataForm />
+            <ScrollView ref={scroll} horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
+                <QnA userData={userData} />
+                <RealtimeFile userData={userData} />
+                {/* <UpdateDataForm /> */}
             </ScrollView>
         </View>
     )

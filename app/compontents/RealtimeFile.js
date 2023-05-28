@@ -3,10 +3,12 @@ import React, {useState, useEffect} from 'react'
 import {ref, onValue} from 'firebase/database'
 import { rdb } from '../firebase';
 
-const RealtimeFile = () => {
+const Wwidth=Dimensions.get('window').width
+
+const RealtimeFile = ({userData}) => {
     const [rtData, setRtData] = useState([]);
 
-    useEffect(()=>{
+    async function sdf(){
         const myRef = ref(rdb, 'users/')
         onValue(myRef, (snapshot)=>{
             const data = snapshot.val();
@@ -14,22 +16,26 @@ const RealtimeFile = () => {
                 id:key, 
                 ...data[key]
             }))
-            // console.log(allPosts)
-            setRtData(allPosts)
+            // console.log('all data: ',allPosts)
+            // setRtData(allPosts)
+            let vals = allPosts.filter((e)=>{
+                return e.id.trim()===userData.id
+            })
+            setRtData([vals[0].Pulse,vals[0].SpO2])
         })
+        
+    }
+    useEffect(()=>{
+        sdf()
     },[])
     return (
         <View style={styles.container}>
-            {
-                rtData.map((item, index)=>{
-                    return(
-                        <View key={index}>
-                            <Text>{item.bp}</Text>
-                            <Text>{item.pulse}</Text>
-                        </View>
-                    )
-                })
-            }
+            <View style={styles.sympBox}>
+                
+                    <Text style={styles.textBox}>Pulse: {rtData[0]}</Text>
+                    <Text style={styles.textBox}>SpO2: {rtData[1]}</Text>
+                
+            </View>
         </View>
     )
 }
@@ -37,5 +43,7 @@ const RealtimeFile = () => {
 export default RealtimeFile
 
 const styles = StyleSheet.create({
-    container:{width:Dimensions.get('window').width}
+    container:{width:Wwidth, paddingTop:20, flex:1, alignItems:'center', justifyContent:'center'},
+    sympBox:{gap:20},
+    textBox:{fontSize:42}
 })

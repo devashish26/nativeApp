@@ -5,7 +5,17 @@ const Wwidth = Dimensions.get('window').width;
 const Wheight = Dimensions.get('screen').height;
 
 const UpdateDataForm = () => {
-    const handleChange=()=>{}
+    const handleChange = (e)=>{
+        // setting user input in patientDetails object
+
+        let value = e.nativeEvent.text;
+        let name = e._dispatchInstances.pendingProps.name;
+        
+    
+
+    }
+
+
     const handleSubmit=()=>{}
     return (
         <View>

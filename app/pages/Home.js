@@ -1,5 +1,5 @@
 import { StyleSheet, View, Dimensions } from 'react-native'
-import React from 'react'
+import React, {useRef} from 'react'
 import MidDiv from '../compontents/MidDiv'
 import BottomDiv from '../compontents/BottomDiv'
 import TopDiv from '../compontents/TopDiv'
@@ -9,6 +9,9 @@ let height = Dimensions.get('window').height
 const Home = ({route}) => {
   // console.log(route.params.userDetails)
   let nameU = route.params.userDetails.email
+
+  const scroll = useRef()
+  
   return (
     <View style={styles.container}>
 
@@ -16,12 +19,12 @@ const Home = ({route}) => {
         <TopDiv name = {nameU}/>
       </View>
 
-      <View style={styles.midDiv}>
-        <MidDiv userData={route.params.userDetails}/>
+      <View style={styles.midDiv} >
+        <MidDiv userData={route.params.userDetails} scroll={scroll}/>
       </View>
 
-      <View style={styles.bottomDiv}>
-        <BottomDiv/>
+      <View style={styles.bottomDiv} >
+        <BottomDiv scroll={scroll}/>
       </View>
 
     </View>

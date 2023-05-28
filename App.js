@@ -17,8 +17,6 @@ export default function App() {
         {loginDetails.signedIn ? (
           <Stack.Navigator initialRouteName='home' >
               <Stack.Screen name = 'home' component={Home} options={{headerShown:false}} initialParams={{userDetails: loginDetails}}/>
-              <Stack.Screen name='PastHistory' component={PastHistory} options={{headerShown:false}}/>
-              <Stack.Screen name='test' component={TestPage} options={{headerShown:false}} initialParams={{userDetails: loginDetails}}/>
           </Stack.Navigator>
         ):(
           <Stack.Navigator initialRouteName='LoginSignup'>
