@@ -12,18 +12,6 @@ const brown = '#A2A378'
 
 function LoginSignupContainer({navigation, route}){
 
-    const [bgActive, setBgActive] = useState(green)
-    const [bgInactive, setBgInactive] = useState(brown)
-
-    const handlePressToggle = ()=>{//serious rework needed
-        if(bgActive === green && bgInactive === brown){
-            setBgActive(brown)
-            setBgInactive(green)
-        }else if(bgActive === brown && bgInactive === green){
-            setBgActive(green)
-            setBgInactive(brown)
-        }
-    }
 
 
     // console.log(route.params.setisSignedIn)
@@ -41,14 +29,22 @@ function LoginSignupContainer({navigation, route}){
         inputRange:[0, width],
         outputRange: [-20,0]
     })
+    const loginColorInterpolate = animation.interpolate({
+        inputRange:[0, width],
+        outputRange: [green,brown]
+    })
+    const signupColorInterpolate = animation.interpolate({
+        inputRange:[0, width],
+        outputRange: [brown,green]
+    })
     return (
         <View style={{flex:1, paddingTop:20, backgroundColor:'#E5F9DB'}}>
             <View>
                 <FormHeader style={{backgroundColor:'black'}} rightHeaderOpacity={rightHeaderOpacity} rightHeaderTranslateY={rightHeaderTranslateY} leftHeaderTranslateX={leftHeaderTranslateX} leftHeading={'Welcome'} rightHeading={'back'} subHeading={`Let's get started!`}/>
             </View>
             <View style={{flexDirection:'row'}}>
-                <FormSelectorButton title='Sign Up' bgCol={bgActive} onPress={()=>{scroll.current.scrollTo({x:0}); handlePressToggle()}}/>
-                <FormSelectorButton title='Login' bgCol={bgInactive} onPress={()=>{scroll.current.scrollTo({x:width}); handlePressToggle()}} />
+                <FormSelectorButton title='Sign Up' bgCol={loginColorInterpolate} onPress={()=>{scroll.current.scrollTo({x:0})}}/>
+                <FormSelectorButton title='Login' bgCol={signupColorInterpolate} onPress={()=>{scroll.current.scrollTo({x:width})}} />
             </View>
             <ScrollView ref={scroll} horizontal pagingEnabled scrollEventThrottle={16} showsHorizontalScrollIndicator={false} onScroll={Animated.event([{nativeEvent:{contentOffset:{x:animation}}}], {useNativeDriver:false})}>
                 <ScrollView>

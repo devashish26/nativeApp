@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, LogBox } from 'react-native';
 import {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -8,6 +8,7 @@ import PastHistory from './app/pages/PastHistory';
 import Home from './app/pages/Home';
 
 export default function App() {
+  LogBox.ignoreAllLogs()
     const [loginDetails, setloginDetails] = useState({signedIn: false})
     // console.log('details in app.js: ', loginDetails)
     const Stack = createNativeStackNavigator();
