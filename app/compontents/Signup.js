@@ -12,6 +12,12 @@ const Wheight = Dimensions.get('screen').height;
 
 export default function Signup({navigation}) {
     const [bgcolTI, setBgcolTI] = useState('aquamarine')
+    const [seed, setSeed] = useState(1)
+
+    const reset = ()=>{
+        setSeed(Math.random())
+    }
+
     // const isFocused = useIsFocused()
     const [patientDetails, setPatientDetails] = useState({
         email:"",
@@ -20,6 +26,22 @@ export default function Signup({navigation}) {
         cpassword:""
     })
     let patIds=[]
+
+    let patIds2
+    const validate2 =async (xid)=>{     //checking if id already exists or not
+        const myRef = collection(db,"patient_login")
+        const myColl = await getDocs(myRef)
+        allEntries = myColl.docs.map((doc)=>({
+            ...doc.data()
+        }))
+        patIds2 = allEntries.map((e)=>{return e.id})
+        if(patIds2.includes(xid)){
+            Alert.alert('User already exists, kindly login')
+            return false
+        }
+        return true
+    }
+    
     const validate= async (pD)=>{
         // first get patient_data collection entries
         let valChecked = false
@@ -51,6 +73,7 @@ export default function Signup({navigation}) {
             Alert.alert("Device ID does not exist")
             return false
         }
+        validate2(pD.id)
         return valChecked
     }
     const handleChange = (e)=>{
@@ -69,14 +92,16 @@ export default function Signup({navigation}) {
         if(await validate(patientDetails)){
             //code to add patientDetails into database
             await setDoc(doc(db, "patient_login", patientDetails.id), {
-                    id: patientDetails.id.trim(),
-                    email: patientDetails.email.trim(),
-                    password: patientDetails.password
-                });
+                id: patientDetails.id.trim(),
+                email: patientDetails.email.trim(),
+                password: patientDetails.password
+            });
+            reset()
+            Alert.alert("Signed in successfully!")
         }
     }
     return (
-        <FormContainer>
+        <FormContainer key={seed}>
             <TextInput onChange={handleChange} name='id' placeholder='Enter device ID' />
             <TextInput onChange={handleChange} name='email' placeholder='Enter email' inputMode='email' />
             <TextInput onChange={handleChange} name='password' placeholder='Enter password' secureTextEntry={true} />
