@@ -1,5 +1,5 @@
 import { StyleSheet, View, ScrollView, Animated, Dimensions } from 'react-native'
-import React, {useRef, useState} from 'react'
+import React, {useRef} from 'react'
 import FormHeader from './../compontents/FormHeader';
 import FormSelectorButton from './../compontents/FormSelectorButton';
 import Login from './../compontents/Login';
@@ -11,8 +11,6 @@ const brown = '#A2A378'
 
 
 function LoginSignupContainer({navigation, route}){
-
-
 
     // console.log(route.params.setisSignedIn)
     const animation = useRef(new Animated.Value(0)).current

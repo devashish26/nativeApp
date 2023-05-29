@@ -16,7 +16,7 @@ const Home = ({route}) => {
     <View style={styles.container}>
 
       <View style={styles.topDiv}>
-        <TopDiv name = {nameU}/>
+        <TopDiv name = {nameU} changeStatus={route.params.setloginDetails}/>
       </View>
 
       <View style={styles.midDiv} >

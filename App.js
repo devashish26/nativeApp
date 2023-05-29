@@ -3,12 +3,10 @@ import {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginSignupContainer from './app/pages/LoginSignupContainer';
-import TestPage from './app/pages/TestPage';
-import PastHistory from './app/pages/PastHistory';
 import Home from './app/pages/Home';
 
 export default function App() {
-  LogBox.ignoreAllLogs()
+    LogBox.ignoreAllLogs()
     const [loginDetails, setloginDetails] = useState({signedIn: false})
     // console.log('details in app.js: ', loginDetails)
     const Stack = createNativeStackNavigator();
@@ -17,7 +15,7 @@ export default function App() {
       <NavigationContainer style={styles.container}>
         {loginDetails.signedIn ? (
           <Stack.Navigator initialRouteName='home' >
-              <Stack.Screen name = 'home' component={Home} options={{headerShown:false}} initialParams={{userDetails: loginDetails}}/>
+              <Stack.Screen name = 'home' component={Home} options={{headerShown:false}} initialParams={{userDetails: loginDetails,setloginDetails: setloginDetails}}/>
           </Stack.Navigator>
         ):(
           <Stack.Navigator initialRouteName='LoginSignup'>
