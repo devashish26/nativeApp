@@ -11,7 +11,6 @@ const Wheight = Dimensions.get('screen').height;
 
 
 export default function Signup({navigation}) {
-    const [bgcolTI, setBgcolTI] = useState('aquamarine')
     const [seed, setSeed] = useState(1)
 
     const reset = ()=>{
@@ -35,6 +34,7 @@ export default function Signup({navigation}) {
             ...doc.data()
         }))
         patIds2 = allEntries.map((e)=>{return e.id})
+        // console.log('pat 2 ids', patIds2)
         if(patIds2.includes(xid)){
             Alert.alert('User already exists, kindly login')
             return false
@@ -52,6 +52,7 @@ export default function Signup({navigation}) {
         }))
         // allEntries is an array which contains all entries of patient_login collection
         patIds = allEntries.map((e)=>{return e.id})
+        // console.log('pat ids: ', patIds)
         if(patIds.includes(pD.id)){
             if(pD.email.includes('@')){
                 if(pD.password.length>=8){
@@ -73,8 +74,10 @@ export default function Signup({navigation}) {
             Alert.alert("Device ID does not exist")
             return false
         }
-        validate2(pD.id)
-        return valChecked
+        if(await validate2(pD.id)){
+            return valChecked
+        }
+        return false
     }
     const handleChange = (e)=>{
         // setting user input in patientDetails object
@@ -98,6 +101,8 @@ export default function Signup({navigation}) {
             });
             reset()
             Alert.alert("Signed in successfully!")
+        }else{
+            // Alert.alert("")
         }
     }
     return (
