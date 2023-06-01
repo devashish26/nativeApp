@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image, ScrollView, Pressable, Button, Alert } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, ScrollView, Pressable, Button, Alert, Image } from 'react-native'
 import React,{useState} from 'react'
 import Symptom from './Symptom'
 
@@ -65,10 +65,9 @@ const QnA = ({userData}) => {
             {/* Add onPress to touchable opacity to toggle symptoms box */}
                 <View>
                     <View style={styles.bigHeaders}>
-                        <View style={{display:'flex', justifyContent:'space-between', flexDirection:'row',margin:10}}>
-                            <Text>HEAD</Text>  
-                            <Text>HEAD Image</Text>  
-                            <Image/>
+                        <View style={{display:'flex', justifyContent:'space-around', flexDirection:'row',margin:10}}>
+                            <Text style={{fontSize:24, marginTop:15}}>HEAD</Text>  
+                            <Image style={{height:70, width:70}} source={require('./../../assets/head.png')}></Image>
                         </View>                                 
                     </View>
                     <View style={styles.sympBox}>
@@ -83,10 +82,9 @@ const QnA = ({userData}) => {
                 </View> 
                 <View>
                     <View style={styles.bigHeaders}>
-                        <View style={{display:'flex', justifyContent:'space-between', flexDirection:'row',margin:10}}>
-                            <Text>MIDDLE</Text>  
-                            <Text>MIDDLE Image</Text>  
-                            <Image/>
+                        <View style={{display:'flex', justifyContent:'space-around', flexDirection:'row',margin:10}}>
+                            <Text style={{fontSize:24, marginTop:15}}>MIDDLE</Text>  
+                            <Image style={{height:70, width:70}} source={require('./../../assets/middle.png')}></Image>
                         </View>
                     </View>
                     <View style={styles.sympBox}>
@@ -101,10 +99,9 @@ const QnA = ({userData}) => {
                 </View>
                 <View>
                     <View style={styles.bigHeaders}>
-                        <View style={{display:'flex', justifyContent:'space-between', flexDirection:'row',margin:10}}>
-                            <Text>LOWER</Text>  
-                            <Text>LOWER Image</Text>  
-                            <Image/>
+                        <View style={{display:'flex', justifyContent:'space-around', flexDirection:'row',margin:10}}>
+                            <Text style={{fontSize:24, marginTop:15}}>LOWER</Text>  
+                            <Image style={{height:70, width:70}} source={require('./../../assets/lower.png')}></Image>
                         </View>
                     </View>
                     <View style={styles.sympBox}>
@@ -119,10 +116,9 @@ const QnA = ({userData}) => {
                 </View>
                 <View>
                     <View style={styles.bigHeaders}>
-                        <View style={{display:'flex', justifyContent:'space-between', flexDirection:'row',margin:10}}>
-                            <Text>MISC</Text>  
-                            <Text>MISC Image</Text>  
-                            <Image/>
+                        <View style={{display:'flex', justifyContent:'space-around', flexDirection:'row',margin:10}}>
+                            <Text style={{fontSize:24, marginTop:15}}>MISC</Text>  
+                            <Image style={{height:70, width:70}} source={require('./../../assets/whole.png')}></Image>
                         </View>
                     </View>
                     <View style={styles.sympBox}>
@@ -158,7 +154,7 @@ export default QnA
 
 const styles = StyleSheet.create({
     container:{width:Dimensions.get('window').width, display:'flex', alignItems:'center'},
-    bigHeaders:{width:Dimensions.get('window').width-10, backgroundColor:'#A0D8B3', marginTop:10, marginBottom:10, height: 50, borderRadius: 10, display:'flex', justifyContent:"center"},
+    bigHeaders:{width:Dimensions.get('window').width-10, backgroundColor:'#A0D8B3', marginTop:10, marginBottom:10, height: 100, borderRadius: 10, display:'flex', justifyContent:"center"},
     sympBox:{backgroundColor:'#fff',padding:10, display:'flex', alignItems:'center', justifyContent:'center', width:Dimensions.get('window').width-10},
     buttonBox:{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-evenly', paddingTop:10}
 })

@@ -66,7 +66,7 @@ export default function Login({changeStatus}) {
   }
   return (
     <>
-        <FormContainer>
+        <FormContainer style={styles.container}>
             <TextInput style={styles.inputstyle} inputMode='email' placeholder='example@email.com' keyboardType='email-address' value={userMail} onChangeText={(e)=>{setUserMail(e)}}/>
             <TextInput style={styles.inputstyle} placeholder='Enter Password' secureTextEntry={true} value={pwd} onChangeText={(e)=>{setPwd(e)}}/>
             <Pressable onPress={()=>{validate()}} style={{backgroundColor:'#83764F', width:Wwidth/5, height:Wheight/25, display:'flex', justifyContent:'center', alignItems:'center', marginLeft:(Wwidth/2 - Wwidth/7)}}>
@@ -80,7 +80,7 @@ export default function Login({changeStatus}) {
 }
 
 const styles = StyleSheet.create({
-    container:{justifyContent:'center', alignItems:'center', backgroundColor:'#E5F9DB', height:300, width:Dimensions.get('window').width},
-    inputstyle:{ borderRadius:15, paddingLeft:10},
+    container:{justifyContent:'center', alignItems:'center', backgroundColor:'#E5F9DB', height:300, width:Dimensions.get('window').width, paddingTop:24},
+    inputstyle:{paddingLeft:10,borderBottomColor:'black', borderBottomWidth:0.5},
     btnstyle:{}
 })

@@ -15,5 +15,5 @@ function FormSelectorButton(props) {
 
 export default FormSelectorButton
 const styles = StyleSheet.create({
-    container:{height:45, width:'50%', backgroundColor:'lightgrey', alignItems:'center', justifyContent:'center', padding:5, }
+    container:{height:45, width:'50%',  alignItems:'center', justifyContent:'center', padding:5, borderTopColor:'rgba(131, 184, 150, 1)', borderTopWidth:1,borderBottomColor:'rgba(131, 184, 150, 1)', borderBottomWidth:0}
 })

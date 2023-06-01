@@ -107,10 +107,10 @@ export default function Signup({navigation}) {
     }
     return (
         <FormContainer key={seed}>
-            <TextInput onChange={handleChange} name='id' placeholder='Enter device ID' />
-            <TextInput onChange={handleChange} name='email' placeholder='Enter email' inputMode='email' />
-            <TextInput onChange={handleChange} name='password' placeholder='Enter password' secureTextEntry={true} />
-            <TextInput onChange={handleChange} name='cpassword' placeholder='Confirm password' secureTextEntry={true} />
+            <TextInput style={styles.inputstyle} onChange={handleChange} name='id' placeholder='Enter device ID' />
+            <TextInput style={styles.inputstyle} onChange={handleChange} name='email' placeholder='Enter email' inputMode='email' />
+            <TextInput style={styles.inputstyle} onChange={handleChange} name='password' placeholder='Enter password' secureTextEntry={true} />
+            <TextInput style={styles.inputstyle} onChange={handleChange} name='cpassword' placeholder='Confirm password' secureTextEntry={true} />
             {/* <Button style={styles.btn} color={'#83764F'} title='Submit' onPress={()=>{handlePress()}}/> */}
             <Pressable onPress={()=>{handlePress()}} style={{backgroundColor:'#83764F', width:Wwidth/5, height:Wheight/25, display:'flex', justifyContent:'center', alignItems:'center', marginLeft:(Wwidth/2 - Wwidth/7)}}>
                 <Text style={{color:'white'}}>SIGNUP</Text>
@@ -122,5 +122,6 @@ export default function Signup({navigation}) {
 const styles = StyleSheet.create({
     btn:{
         backgroundColor:'white'
-    }
+    },
+    inputstyle:{paddingLeft:10,borderBottomColor:'black', borderBottomWidth:0.5},
 })
