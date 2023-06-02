@@ -40,8 +40,8 @@ const QnA = ({userData}) => {
         if(selectedSymptoms.length){
             // access user id using userData.id
             const stringedSymps= selectedSymptoms.join(" ")
-            console.log(selectedSymptoms)
-            console.log(stringedSymps)
+            // console.log(selectedSymptoms)
+            // console.log(stringedSymps)
             try{
                 const xref = doc(db, "patient_symptoms", userData.id);
                 await updateDoc(xref, {
@@ -49,6 +49,14 @@ const QnA = ({userData}) => {
                 });
 
                 const xres = await xref.updateDoc
+
+                const yref = doc(db, "patient_data", userData.id);
+                await updateDoc(yref, {
+                    symptoms: stringedSymps, 
+                    submitted:true
+                });
+
+                const yres = await yref.updateDoc
             }catch{
                 await setDoc(doc(db, "patient_symptoms", userData.id),{
                 id: userData.id.trim(),
